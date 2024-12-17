@@ -177,17 +177,25 @@ class Resume:
             )
 
         if phone != "":
-            self.code += r"\small " + phone + r" $|$ " + os.linesep
+            self.code += r"\small " + phone
+            if email != "":
+                 self.code += r" $|$ "
+            self.code += os.linesep
+
+        
 
         if email != "":
+            
             self.code += (
                 r"\href{mailto:"
                 + email
                 + r"}{\underline{"
                 + email
-                + r"}} $|$ "
-                + os.linesep
             )
+
+            if phone != "":
+                self.code += + r"}} $|$ "
+            self.code += os.linesep
 
         for link in links:
             self.code += (

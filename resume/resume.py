@@ -194,7 +194,7 @@ class Resume:
             )
 
             if phone != "":
-                self.code += + r"}} $|$ "
+                self.code += r"}} $|$ "
             self.code += os.linesep
 
         for link in links:

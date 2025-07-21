@@ -29,13 +29,13 @@
         <span class="sidenote">
           This refers to
           <a
-            tarPOST="_blank"
+            target="_blank"
             rel="noopener noreferrer"
             href="https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs"
             >Jake's Resume</a
           >, a widely used resume template. See
           <a
-            tarPOST="_blank"
+            target="_blank"
             rel="noopener noreferrer"
             href="https://asahoo.dev/resume.pdf"
             >my resume</a
@@ -68,14 +68,14 @@
     <div class="usage">
       <h2>How to use?</h2>
       <p>
-        You can use the API by sending a POST request to either of our endpoints
-        at<br />
-        <code>https://resumetex.asahoo.dev/{REPLACE_WITH_API_ENDPOINT}</code>
-        with your resume formatted in the <a href="/documentation">following way</a>:
+        You can use the API by sending a POST request to any of our endpoints:<br />
+        <code>https://resumetex.asahoo.dev/{ENDPOINT}</code>
+        with your resume data formatted as JSON according to our <a href="/documentation">documentation schema</a>.
       </p>
       <p>
-        The API will return a JSON response with the URL to the generated PDF
-        and tex file.
+        The API will generate your resume in the requested format. For PDF and TeX endpoints,
+        the file will be returned directly for download. The text endpoint returns the LaTeX
+        code as plain text in the response body.
       </p>
     </div>
     <div class="tool">
@@ -98,19 +98,39 @@
       </fieldset>
     </div>
     <div>
+      <h2>Command Line Usage</h2>
       <p>
-        Alterntively, you can use curl or wget to send a get request to the API,
-        attaching a json file as the body:
+        You can use curl to send requests to the API with a JSON file:
       </p>
       <pre>
-          <code class="language-sh">
-curl -X get -H "Content-Type: application/json" -d # finish this</code>
+          <code class="language-bash">
+# Generate PDF
+curl -X POST -H "Content-Type: application/json" \
+  -d @resume.json \
+  https://resumetex.asahoo.dev/api/v1/pdf \
+  --output resume.pdf
+
+# Generate LaTeX file  
+curl -X POST -H "Content-Type: application/json" \
+  -d @resume.json \
+  https://resumetex.asahoo.dev/api/v1/tex \
+  --output resume.tex
+
+# Get LaTeX as text
+curl -X POST -H "Content-Type: application/json" \
+  -d @resume.json \
+  https://resumetex.asahoo.dev/api/v1/text</code>
       </pre>
     </div>
 
     <div>
-      <h2>References:</h2>
-      <p>I will finish this later.</p>
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs" target="_blank" rel="noopener noreferrer">Jake's Resume Template on Overleaf</a> - The LaTeX template this API is based on</li>
+        <li><a href="https://github.com/anish-sahoo/ResumeTex" target="_blank" rel="noopener noreferrer">ResumeTex GitHub Repository</a> - Source code and documentation</li>
+        <li><a href="/documentation">API Documentation</a> - Complete JSON schema and usage examples</li>
+        <li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">FastAPI</a> - The web framework powering this API</li>
+      </ul>
     </div>
 
     <div class="footnotes">

@@ -94,7 +94,7 @@
         <button onclick="generatePDF()">Generate PDF</button>
         <button onclick="generateText()">Generate Latex (text)</button>
         <button onclick="insertSampleResume()">Insert Sample</button>
-        <button onclick="clear()">Clear</button>
+        <button onclick="clearTextarea()">Clear</button>
       </fieldset>
     </div>
     <div>
@@ -219,7 +219,7 @@ curl -X POST -H "Content-Type: application/json" \
       window.open(url, "_blank");
     }
 
-    function clear() {
+    function clearTextarea() {
       document.getElementById("json").value = "";
     }
 

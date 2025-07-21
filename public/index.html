@@ -150,7 +150,24 @@ curl -X POST -H "Content-Type: application/json" \
       document.body.classList.toggle("latex-dark");
     });
 
+    function validateInput() {
+      const json = document.getElementById("json").value.trim();
+      if (!json) {
+        alert("Please enter your resume data in JSON format before generating.");
+        return false;
+      }
+      try {
+        JSON.parse(json);
+        return true;
+      } catch (e) {
+        alert("Invalid JSON format. Please check your input and try again.");
+        return false;
+      }
+    }
+
     async function generateTex() {
+      if (!validateInput()) return;
+      
       const json = document.getElementById("json").value;
       const response = await fetch("/api/v1/tex", {
         method: "POST",
@@ -170,6 +187,8 @@ curl -X POST -H "Content-Type: application/json" \
     }
 
     async function generateText() {
+      if (!validateInput()) return;
+      
       const json = document.getElementById("json").value;
       const response = await fetch("/api/v1/text", {
         method: "POST",
@@ -184,6 +203,8 @@ curl -X POST -H "Content-Type: application/json" \
     }
 
     async function generatePDF() {
+      if (!validateInput()) return;
+      
       const json = document.getElementById("json").value;
       console.log("Sending generatePDF:\n", json);
       const response = await fetch("/api/v1/pdf", {

@@ -19,9 +19,9 @@ class ResumeMaker(Resume):
         font_size = data.get("font_size", 11)
         resume = Resume()
         if font != "" and font_size != 11:
-            resume = Resume(font, font_size)
+            resume = Resume(font=font, font_size=font_size)
         elif font != "":
-            resume = Resume(font)
+            resume = Resume(font=font)
         elif font_size != 11:
             resume = Resume(font_size=font_size)    
         resume.add_personal_info(data)
